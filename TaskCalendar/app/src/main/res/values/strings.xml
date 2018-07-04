@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Task Calendar</string>
+
+    // Main Activity
+    <string name="event_toolbar_title">Events</string>
+    <string name="task_toolbar_title">Tasks</string>
+    <string name="add_event_button_description">Add Event</string>
+    <string name="add_task_button_description">Add Task</string>
+    <string name="complete_button">Done</string>
+
+    // Add Event Activity
+    <string name="text_view_task_name">Task Name</string>
+    <string name="plain_text_task_name_hint">Enter Task Here</string>
+    <string name="text_view_due_date">Due Date</string>
+    <string name="day_hint">dd</string>
+    <string name="month_hint">mm</string>
+    <string name="year_hint">yyyy</string>
+    <string name="text_view_slash">/</string>
+    <string name="calendar_button_description">Open Date Picker</string>
+    <string name="text_view_importance">Importance</string>
+    <string name="not_important">None</string>
+    <string name="very_important">High</string>
+    <string name="text_view_time_required">Time required</string>
+    <string name="hours_hint">0</string>
+    <string name="hours">Hours</string>
+    <string name="text_view_note">Note</string>
+    <string name="note_hint">Enter Extra Information Here</string>
+
+</resources>

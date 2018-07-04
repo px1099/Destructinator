@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:baselineAligned="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/EventToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@id/NewEventButton"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:title="@string/event_toolbar_title">
+
+        </android.support.v7.widget.Toolbar>
+
+        <ImageButton
+            android:id="@+id/NewEventButton"
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/add_event_button_description"
+            android:onClick="newEvent"
+            app:srcCompat="@android:drawable/ic_menu_add" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/TaskToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@id/NewTaskButton"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:title="@string/task_toolbar_title" />
+
+        <ImageButton
+            android:id="@+id/NewTaskButton"
+            android:layout_width="?android:attr/actionBarSize"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/add_task_button_description"
+            android:onClick="newTask"
+            app:srcCompat="@android:drawable/ic_menu_add" />
+
+        <ListView
+            android:id="@+id/TaskList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TaskToolbar" />
+
+    </RelativeLayout>
+</LinearLayout>
