@@ -55,8 +55,7 @@ public class NewTaskActivity extends AppCompatActivity {
         if (id == R.id.ConfirmButton) {
             myDb.insertData(task_title.getText().toString(),"","","","","","");
             Toast.makeText(this,"Task created",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

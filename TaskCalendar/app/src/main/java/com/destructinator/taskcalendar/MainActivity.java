@@ -28,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
         updateUI();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     // Called when tap new event button
     public void newEvent(View view) {
         Intent intent = new Intent(this, NewEventActivity.class);
