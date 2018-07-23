@@ -1,0 +1,55 @@
+<resources>
+    //TODO: MAIN
+    <string name="main_title">Task Calendar</string>
+    <string name="add_new_task">Add New Task</string>
+    <string name="show_task_list">Task List</string>
+    <string name="share_download">Share and Download</string>
+
+    //INPUT_TASK
+    <string name="input_task_name_title">Add task</string>
+    <string name="task_name">Task Name:</string>
+    <string name="enter_task">Enter Task Here</string>
+    <string name="description">Description:</string>
+    <string name="description_hint">Write your Description here</string>
+
+    //TASK_LIST
+    <string name="task_list_title">Task list</string>
+
+    //CALENDAR LAYOUT
+    <string name="deadline_date">Deadline Date:</string>
+
+    //PRIORITY LAYOUT
+    <string name="priority">Priority:</string>
+    <string name="no_important">None</string>
+    <string name="high_important">High</string>
+
+    //TIME REQUIRED LAYOUT
+    <string name="time_required">Time required:</string>
+
+    //SUBMIT BUTTON
+    <string name="submit">Submit</string>
+
+    //INFO
+    <string name="task_info">Show Info</string>
+    <string name="task_name_info">Task name</string>
+
+    <string name="description_info">Description:</string>
+    <string name="description_hint_info">Write your Description here</string>
+
+    //INFO
+    <string name="done">DONE</string>
+    <string name="edit">EDIT</string>
+    <string name="delete">DELETE</string>
+
+    //TASK LIST
+    <string name="task_name_task_list">Task Name</string>
+    <string name="required_time_task_list">Required time --- </string>
+
+    //UPLOAD AND DOWNLOAD
+    <string name="upload_download">Choose the filename to download or upload</string>
+    <string name="task_name_upload_download">Task name</string>
+    <string name="download">Download</string>
+    <string name="upload">Upload</string>
+
+    <string name="action_settings">Setting</string>
+</resources>

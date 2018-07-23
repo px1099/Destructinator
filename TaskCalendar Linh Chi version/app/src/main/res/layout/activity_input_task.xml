@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:background="@color/main_background"
+
+    tools:context=".NewTaskActivity">
+
+    <TextView
+        android:id="@+id/task_name_textview_input_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/task_name"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/font_size"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/task_name_edittext_input_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/enter_task"
+        android:inputType="text"
+        android:textSize="@dimen/font_size"
+        android:imeOptions="actionDone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_name_textview" />
+
+    <include
+        android:id="@+id/calendar_layout_input_task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        layout="@layout/activity_calendar_layout" />
+
+    <include
+        android:id="@+id/time_required_input_task"
+        layout="@layout/activity_required_time" />
+
+    <TextView
+        android:id="@+id/description_textview_input_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size"
+        android:textStyle="bold"
+        android:textColor="@color/Black"
+        android:text="@string/description" />
+
+    <EditText
+        android:id="@+id/description_edittext_input_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/description_hint"
+        android:inputType="text"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/submit_button_input_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/submit"
+
+        android:onClick="submit"/>
+</LinearLayout>

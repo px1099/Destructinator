@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_background"
+    android:orientation="vertical"
+
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/add_new_task_textview_main"
+        style="@style/MainMenuText"
+        android:background="@color/add_new_task"
+        android:text="@string/add_new_task"
+
+        android:onClick="openInputScreen"/>
+
+    <TextView
+        android:id="@+id/task_list_textview_main"
+        style="@style/MainMenuText"
+        android:background="@color/task_list"
+        android:text="@string/show_task_list"
+
+        android:onClick="openOutputScreen"/>
+</LinearLayout>
