@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/main_background"
+    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+
+    tools:context=".ShowInfo">
+
+    <EditText
+        android:id="@+id/task_name_edittext_task_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size"
+        android:hint="@string/task_name_info"
+        android:textColor="@color/Black" />
+
+    <TextView
+        android:id="@+id/description_textview_task_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="@string/description_info"
+        android:textSize="@dimen/font_size"
+        android:textColor="@color/Black"/>
+
+    <EditText
+        android:id="@+id/description_edittext_task_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/description_hint_info"
+        android:textSize="@dimen/font_size" />
+
+    <include
+        android:id="@+id/calendar_layout_task_info"
+        layout="@layout/activity_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/done_button_task_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/done"
+            android:textSize="@dimen/font_size"
+            android:textColor="@color/White"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:background="@color/done"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/edit_button_task_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit"
+            android:textColor="@color/White"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:background="@color/edit"
+            android:layout_weight="1"
+            android:onClick="edit_mode" />
+        <Button
+            android:id="@+id/delete_button_task_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:textColor="@color/White"
+            android:textSize="@dimen/font_size"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:background="@color/delete"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</LinearLayout>

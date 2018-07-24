@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+
+    tools:showIn="@layout/activity_input_task">
+
+    <TextView
+        android:id="@+id/deadline_date_textview_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deadline_date"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="@dimen/font_size" />
+
+    <EditText
+        android:id="@+id/hour_edittext_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:hint="01"
+        android:textSize="@dimen/font_size"
+        />
+
+    <TextView
+        android:id="@+id/colon_textview_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textSize="@dimen/font_size" />
+
+    <EditText
+        android:id="@+id/min_editText_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size"
+        android:hint="00" />
+
+
+    <EditText
+        android:id="@+id/day_edittext_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:textSize="@dimen/font_size"
+        android:hint="dd" />
+
+    <TextView
+        android:id="@+id/splash1_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:textSize="@dimen/font_size" />
+
+    <EditText
+        android:id="@+id/month_edittext_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="mm"
+        android:textSize="@dimen/font_size"
+        />
+
+    <TextView
+        android:id="@+id/splash2_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        android:textSize="@dimen/font_size" />
+
+    <EditText
+        android:id="@+id/year_edittext_calendar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="yyyy"
+        android:textSize="@dimen/font_size"/>
+</LinearLayout>

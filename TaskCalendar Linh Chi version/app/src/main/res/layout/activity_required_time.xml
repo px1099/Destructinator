@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+
+    tools:showIn="@layout/activity_input_task">
+
+    <TextView
+        android:id="@+id/required_time_textview_required_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_required"
+        android:textColor="@color/Black"
+        android:textSize="@dimen/font_size"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/hour_required_edittext_required_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="hh"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@id/required_time_textview_required_time"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/colon_textview_required_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=":"
+        android:textSize="@dimen/font_size"
+        android:textColor="@color/Black"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@id/hour_required_edittext_required_time"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/min_required_edditext_required_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="mm"
+        app:layout_constraintStart_toEndOf="@id/colon_textview_required_time"
+        app:layout_constraintTop_toTopOf="parent"
+        android:inputType="text" />
+
+</android.support.constraint.ConstraintLayout>
