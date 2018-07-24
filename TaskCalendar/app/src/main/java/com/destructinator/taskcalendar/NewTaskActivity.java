@@ -2,7 +2,6 @@ package com.destructinator.taskcalendar;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,26 +40,28 @@ public class NewTaskActivity extends AppCompatActivity {
         myDb = MainActivity.myDb;
     }
 
-    // create an action bar button
+    // create an action bar button for this activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_task_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    // handle button activities
+    // add data to the database and end the activity when the action bar button is pressed
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.ConfirmButton) {
-            myDb.insertData(task_title.getText().toString(),"","","","","","");
+            myDb.insertData(
+                    task_title.getText().toString(),
+                    "","","","","","");
             Toast.makeText(this,"Task created",Toast.LENGTH_LONG).show();
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    // Calendar picker dialog
+    // Open calendar picker dialog when click the image calendar button
     public void showDialogOnButtonClick() {
         btn = findViewById(R.id.CalendarButton);
         btn.setOnClickListener(
@@ -80,6 +81,7 @@ public class NewTaskActivity extends AppCompatActivity {
         return null;
     }
 
+    // set up the date variables based on the picked date in the dialog
     private DatePickerDialog.OnDateSetListener datePickerListner
             = new DatePickerDialog.OnDateSetListener() {
         @Override
@@ -93,6 +95,7 @@ public class NewTaskActivity extends AppCompatActivity {
         }
     };
 
+    // set up the initial date as the date of the day
     public void setUpCurrentDate() {
         final Calendar cal = Calendar.getInstance();
         year_x = cal.get(Calendar.YEAR);

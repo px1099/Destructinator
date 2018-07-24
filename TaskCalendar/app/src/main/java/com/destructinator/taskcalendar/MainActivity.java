@@ -14,10 +14,9 @@ import java.util.ArrayList;
 // import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    static DatabaseHelper myDb;
-    ListView mTaskListView;
+    static DatabaseHelper myDb;     // the task list database
+    ListView mTaskListView;         // the list view to display database
     ArrayAdapter<String> mAdapter;
-    // public static final String EXTRA_MESSAGE = "com.destructinator.taskcalendar.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +33,19 @@ public class MainActivity extends AppCompatActivity {
         updateUI();
     }
 
-    // Called when tap new event button
+    // Open new event activity when tap new event button
     public void newEvent(View view) {
         Intent intent = new Intent(this, NewEventActivity.class);
         startActivity(intent);
     }
 
-    // Called when tap new task button
+    // Open new task activity when tap new task button
     public void newTask(View view) {
         Intent intent = new Intent(this, NewTaskActivity.class);
         startActivity(intent);
     }
 
+    // Use this function to update task list
     private void updateUI() {
         ArrayList<String> taskList = new ArrayList<>();
         SQLiteDatabase db = myDb.getReadableDatabase();
@@ -73,9 +73,10 @@ public class MainActivity extends AppCompatActivity {
         db.close();
     }
 
+    // delete the task from the database
     public void deleteTask(View view) {
         View parent = (View) view.getParent();
-        TextView taskTextView = (TextView) parent.findViewById(R.id.task_title);
+        TextView taskTextView = parent.findViewById(R.id.task_title);
         String task = String.valueOf(taskTextView.getText());
         SQLiteDatabase db = myDb.getWritableDatabase();
         db.delete(DatabaseHelper.TABLE_NAME,
@@ -85,9 +86,4 @@ public class MainActivity extends AppCompatActivity {
         updateUI();
     }
 
-    /*
-    public void showToast(View view) {
-        Toast.makeText(getApplicationContext(), "Your toast message.", Toast.LENGTH_SHORT).show();
-    }
-    */
 }
