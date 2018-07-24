@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +23,8 @@ public class NewTaskActivity extends AppCompatActivity {
     int year_x,month_x,day_x;
     static final int DIALOG_ID = 0;
     TextView year_text, month_text, day_text;
-    EditText task_title;
+    EditText task_title, req_time_text, note_text;
+    RadioGroup importance_group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +32,14 @@ public class NewTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_task);
         // change action bar title
         setTitle("Add New Task");
-        // set up date picker dialog
+        // set up
         year_text = findViewById(R.id.TextViewYear);
         month_text = findViewById(R.id.TextViewMonth);
         day_text = findViewById(R.id.TextViewDay);
         task_title = findViewById(R.id.TaskName);
+        req_time_text = findViewById(R.id.RequiredTime);
+        note_text = findViewById(R.id.Note);
+        importance_group = findViewById(R.id.ImportanceRadioGroup);
         setUpCurrentDate();
         showDialogOnButtonClick();
         // open database
@@ -54,11 +60,29 @@ public class NewTaskActivity extends AppCompatActivity {
         if (id == R.id.ConfirmButton) {
             myDb.insertData(
                     task_title.getText().toString(),
-                    "","","","","","");
+                    day_text.getText().toString(),
+                    month_text.getText().toString(),
+                    year_text.getText().toString(),
+                    getImportance(),
+                    req_time_text.getText().toString(),
+                    note_text.getText().toString());
             Toast.makeText(this,"Task created",Toast.LENGTH_LONG).show();
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // return the importance of the selected radio button
+    public String getImportance() {
+        String result;
+        int selected_importance = importance_group.getCheckedRadioButtonId();
+        switch (selected_importance) {
+            case R.id.ImportanceRadio1:     result = "1";   break;
+            case R.id.ImportanceRadio2:     result = "2";   break;
+            case R.id.ImportanceRadio3:     result = "3";   break;
+            default:                        result = "0";   break;
+        }
+        return result;
     }
 
     // Open calendar picker dialog when click the image calendar button
@@ -105,5 +129,4 @@ public class NewTaskActivity extends AppCompatActivity {
         month_text.setText(String.valueOf(month_x + 1));
         day_text.setText(String.valueOf(day_x));
     }
-
 }

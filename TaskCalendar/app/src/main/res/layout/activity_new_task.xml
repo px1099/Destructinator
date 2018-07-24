@@ -125,11 +125,17 @@
         app:layout_constraintTop_toTopOf="@+id/TextViewNoneImportance">
 
         <RadioButton
-            android:id="@+id/ImportanceRadio1"
+            android:id="@+id/ImportanceRadio0"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/ImportanceRadio1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <RadioButton
             android:id="@+id/ImportanceRadio2"
@@ -139,12 +145,6 @@
 
         <RadioButton
             android:id="@+id/ImportanceRadio3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:id="@+id/ImportanceRadio4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -202,11 +202,11 @@
         android:imeOptions="actionDone"
         android:inputType="number"
         android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/TextViewHour"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewHourRequired"
         app:layout_constraintTop_toBottomOf="@+id/ImportanceRadioGroup" />
 
     <TextView
-        android:id="@+id/TextViewHour"
+        android:id="@+id/TextViewHourRequired"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
