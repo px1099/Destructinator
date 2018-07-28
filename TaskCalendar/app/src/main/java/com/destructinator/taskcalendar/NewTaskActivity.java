@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 public class NewTaskActivity extends AppCompatActivity {
-    DatabaseHelper myDb;
+    TaskDatabaseHelper myDb;
     ImageButton btn;
     int year_x,month_x,day_x;
     static final int DIALOG_ID = 0;
@@ -43,7 +42,7 @@ public class NewTaskActivity extends AppCompatActivity {
         setUpCurrentDate();
         showDialogOnButtonClick();
         // open database
-        myDb = MainActivity.myDb;
+        myDb = TaskDatabaseHelper.getInstance(this);
     }
 
     // create an action bar button for this activity
@@ -58,14 +57,15 @@ public class NewTaskActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.ConfirmButton) {
-            myDb.insertData(
-                    task_title.getText().toString(),
-                    day_text.getText().toString(),
-                    month_text.getText().toString(),
-                    year_text.getText().toString(),
-                    getImportance(),
-                    req_time_text.getText().toString(),
-                    note_text.getText().toString());
+            Task new_task = new Task();
+            new_task.title = task_title.getText().toString();
+            new_task.day = Integer.parseInt(day_text.getText().toString());
+            new_task.month = Integer.parseInt(month_text.getText().toString());
+            new_task.year = Integer.parseInt(year_text.getText().toString());
+            new_task.imp = getImportance();
+            new_task.req = getReqtime();
+            new_task.note = note_text.getText().toString();
+            myDb.insertData(new_task);
             Toast.makeText(this,"Task created",Toast.LENGTH_LONG).show();
             finish();
         }
@@ -73,14 +73,26 @@ public class NewTaskActivity extends AppCompatActivity {
     }
 
     // return the importance of the selected radio button
-    public String getImportance() {
-        String result;
+    public int getImportance() {
+        int result;
         int selected_importance = importance_group.getCheckedRadioButtonId();
         switch (selected_importance) {
-            case R.id.ImportanceRadio1:     result = "1";   break;
-            case R.id.ImportanceRadio2:     result = "2";   break;
-            case R.id.ImportanceRadio3:     result = "3";   break;
-            default:                        result = "0";   break;
+            case R.id.ImportanceRadio1:     result = 1;   break;
+            case R.id.ImportanceRadio2:     result = 2;   break;
+            case R.id.ImportanceRadio3:     result = 3;   break;
+            default:                        result = 0;   break;
+        }
+        return result;
+    }
+
+    public int getReqtime() {
+        int result = 0;
+        String result_string = req_time_text.getText().toString();
+        try {
+            result = Integer.parseInt(result_string);
+        }
+        catch (NumberFormatException e) {
+            result = 0;
         }
         return result;
     }

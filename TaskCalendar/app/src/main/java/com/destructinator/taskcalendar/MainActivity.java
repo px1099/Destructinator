@@ -1,28 +1,25 @@
 package com.destructinator.taskcalendar;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import java.util.ArrayList;
-// import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    static DatabaseHelper myDb;     // the task list database
-    ListView mTaskListView;         // the list view to display database
-    ArrayAdapter<String> mAdapter;
+    TaskDatabaseHelper myDb;     // the task list database
+    ListView mTaskListView;      // the list view to display database
+    TasksAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myDb = new DatabaseHelper(this);
+        myDb = TaskDatabaseHelper.getInstance(this);
         mTaskListView = findViewById(R.id.TaskList);
         updateUI();
     }
@@ -47,43 +44,29 @@ public class MainActivity extends AppCompatActivity {
 
     // Use this function to update task list
     private void updateUI() {
-        ArrayList<String> taskList = new ArrayList<>();
-        SQLiteDatabase db = myDb.getReadableDatabase();
-        Cursor cursor = db.query(DatabaseHelper.TABLE_NAME,
-                new String[]{DatabaseHelper.COL_1, DatabaseHelper.COL_2},
-                null, null, null, null, null);
-        while (cursor.moveToNext()) {
-            int idx = cursor.getColumnIndex(DatabaseHelper.COL_2);
-            taskList.add(cursor.getString(idx));
-        }
-
+        ArrayList<Task> taskList = myDb.getAllTasks();
         if (mAdapter == null) {
-            mAdapter = new ArrayAdapter<>(this,
-                    R.layout.task_item,
-                    R.id.task_title,
-                    taskList);
+            mAdapter = new TasksAdapter(this, taskList);
             mTaskListView.setAdapter(mAdapter);
         } else {
             mAdapter.clear();
             mAdapter.addAll(taskList);
             mAdapter.notifyDataSetChanged();
         }
-
-        cursor.close();
-        db.close();
     }
 
     // delete the task from the database
-    public void deleteTask(View view) {
+    public void completeTask(View view) {
         View parent = (View) view.getParent();
-        TextView taskTextView = parent.findViewById(R.id.task_title);
-        String task = String.valueOf(taskTextView.getText());
-        SQLiteDatabase db = myDb.getWritableDatabase();
-        db.delete(DatabaseHelper.TABLE_NAME,
-                DatabaseHelper.COL_2 + " = ?",
-                new String[]{task});
-        db.close();
+        TextView taskTextView = parent.findViewById(R.id.textViewID);
+        CheckBox box = parent.findViewById(R.id.checkBox);
+        if(box.isChecked()) {
+            box.toggle();
+        }
+        int completedID = Integer.parseInt(taskTextView.getText().toString());
+        myDb.deleteData(completedID);
         updateUI();
+        Toast.makeText(this,"Task completed",Toast.LENGTH_LONG).show();
     }
 
 }
