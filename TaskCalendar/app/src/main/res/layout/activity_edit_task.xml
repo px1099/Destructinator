@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditTaskActivity">
+
+    <TextView
+        android:id="@+id/TextViewTaskName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/text_view_task_name"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/TaskName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="@string/plain_text_task_name_hint"
+        android:inputType="text"
+        android:imeOptions="actionDone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewTaskName" />
+
+    <TextView
+        android:id="@+id/TextViewDueDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_view_due_date"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/TextViewDay"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewDay"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TextViewDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/day_hint"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewSlash1"
+        app:layout_constraintStart_toEndOf="@+id/TextViewDueDate"
+        app:layout_constraintTop_toBottomOf="@+id/TaskName" />
+
+    <TextView
+        android:id="@+id/TextViewSlash1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/text_view_slash"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/TextViewDay"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewMonth"
+        app:layout_constraintStart_toEndOf="@+id/TextViewDay" />
+
+    <TextView
+        android:id="@+id/TextViewMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/month_hint"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/TextViewSlash1"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewSlash2"
+        app:layout_constraintStart_toEndOf="@+id/TextViewSlash1" />
+
+    <TextView
+        android:id="@+id/TextViewSlash2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/text_view_slash"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/TextViewMonth"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewYear"
+        app:layout_constraintStart_toEndOf="@+id/TextViewMonth" />
+
+    <TextView
+        android:id="@+id/TextViewYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/year_hint"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/TextViewSlash2"
+        app:layout_constraintEnd_toStartOf="@+id/CalendarButton"
+        app:layout_constraintStart_toEndOf="@+id/TextViewSlash2" />
+
+    <ImageButton
+        android:id="@+id/CalendarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/calendar_button_description"
+        app:layout_constraintBottom_toBottomOf="@+id/TextViewYear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/TextViewYear"
+        app:layout_constraintTop_toTopOf="@+id/TextViewYear"
+        app:srcCompat="@android:drawable/ic_menu_today" />
+
+    <RadioGroup
+        android:id="@+id/ImportanceRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/TextViewNoneImportance"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewHighImportance"
+        app:layout_constraintTop_toTopOf="@+id/TextViewNoneImportance">
+
+        <RadioButton
+            android:id="@+id/ImportanceRadio0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/ImportanceRadio1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/ImportanceRadio2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:id="@+id/ImportanceRadio3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/TextViewImportance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/text_view_importance"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewDay" />
+
+    <TextView
+        android:id="@+id/TextViewNoneImportance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/not_important"
+        app:layout_constraintBaseline_toBaselineOf="@+id/TextViewImportance"
+        app:layout_constraintEnd_toStartOf="@+id/ImportanceRadioGroup" />
+
+    <TextView
+        android:id="@+id/TextViewHighImportance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/very_important"
+        app:layout_constraintBottom_toBottomOf="@+id/ImportanceRadioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ImportanceRadioGroup" />
+
+    <TextView
+        android:id="@+id/TextViewTimeRequired"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/text_view_time_required"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/RequiredTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/RequiredTime" />
+
+    <EditText
+        android:id="@+id/RequiredTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="3"
+        android:hint="@string/hours_hint"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/TextViewHourRequired"
+        app:layout_constraintTop_toBottomOf="@+id/ImportanceRadioGroup" />
+
+    <TextView
+        android:id="@+id/TextViewHourRequired"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/hours"
+        app:layout_constraintBaseline_toBaselineOf="@+id/TextViewTimeRequired"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/TextViewNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/text_view_note"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RequiredTime" />
+
+    <EditText
+        android:id="@+id/Note"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="#d8faff"
+        android:gravity="top|start"
+        android:hint="@string/note_hint"
+        android:inputType="textMultiLine"
+        android:lines="8"
+        android:maxLines="10"
+        android:minLines="6"
+        android:scrollbars="vertical"
+        android:imeOptions="actionDone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextViewNote" />
+
+</android.support.constraint.ConstraintLayout>

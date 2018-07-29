@@ -10,27 +10,27 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Calendar;
-
-public class NewTaskActivity extends AppCompatActivity {
+public class EditTaskActivity extends AppCompatActivity {
     TaskDatabaseHelper myDb;
     ImageButton btn;
-    int year_x,month_x,day_x;
+    int year_x,month_x,day_x,task_id;
     static final int DIALOG_ID = 0;
     TextView year_text, month_text, day_text;
     EditText task_title, req_time_text, note_text;
     RadioGroup importance_group;
+    RadioButton imp0, imp1, imp2, imp3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_task);
+        setContentView(R.layout.activity_edit_task);
         // change action bar title
-        setTitle("Add New Task");
+        setTitle("Edit Task");
         // set up
         year_text = findViewById(R.id.TextViewYear);
         month_text = findViewById(R.id.TextViewMonth);
@@ -39,10 +39,14 @@ public class NewTaskActivity extends AppCompatActivity {
         req_time_text = findViewById(R.id.RequiredTime);
         note_text = findViewById(R.id.Note);
         importance_group = findViewById(R.id.ImportanceRadioGroup);
-        setUpCurrentDate();
-        showDialogOnButtonClick();
+        imp0 = findViewById(R.id.ImportanceRadio0);
+        imp1 = findViewById(R.id.ImportanceRadio1);
+        imp2 = findViewById(R.id.ImportanceRadio2);
+        imp3 = findViewById(R.id.ImportanceRadio3);
         // open database
         myDb = TaskDatabaseHelper.getInstance(this);
+        setUpView();
+        showDialogOnButtonClick();
     }
 
     // create an action bar button for this activity
@@ -57,16 +61,17 @@ public class NewTaskActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.ConfirmButton) {
-            Task new_task = new Task();
-            new_task.title = task_title.getText().toString();
-            new_task.day = Integer.parseInt(day_text.getText().toString());
-            new_task.month = Integer.parseInt(month_text.getText().toString());
-            new_task.year = Integer.parseInt(year_text.getText().toString());
-            new_task.imp = getImportance();
-            new_task.req = getReqtime();
-            new_task.note = note_text.getText().toString();
-            myDb.insertData(new_task);
-            Toast.makeText(this,"Task created",Toast.LENGTH_SHORT).show();
+            Task task = new Task();
+            task.id = task_id;
+            task.title = task_title.getText().toString();
+            task.day = Integer.parseInt(day_text.getText().toString());
+            task.month = Integer.parseInt(month_text.getText().toString());
+            task.year = Integer.parseInt(year_text.getText().toString());
+            task.imp = getImportance();
+            task.req = getReqtime();
+            task.note = note_text.getText().toString();
+            myDb.updateData(task);
+            Toast.makeText(this,"Task updated",Toast.LENGTH_SHORT).show();
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -113,7 +118,7 @@ public class NewTaskActivity extends AppCompatActivity {
     @Override
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_ID)
-            return new DatePickerDialog(this, datePickerListner, year_x, month_x, day_x);
+            return new DatePickerDialog(this, datePickerListner, year_x, month_x - 1, day_x);
         return null;
     }
 
@@ -132,13 +137,31 @@ public class NewTaskActivity extends AppCompatActivity {
     };
 
     // set up the initial date as the date of the day
-    public void setUpCurrentDate() {
-        final Calendar cal = Calendar.getInstance();
-        year_x = cal.get(Calendar.YEAR);
-        month_x = cal.get(Calendar.MONTH);
-        day_x = cal.get(Calendar.DAY_OF_MONTH);
+    public void setUpView() {
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            task_id = b.getInt("id");
+        }
+        Task edited_task = new Task();
+        edited_task = myDb.getTask(task_id);
+        task_title.setText(edited_task.title);
+        year_x = edited_task.year;
+        month_x = edited_task.month;
+        day_x = edited_task.day;
         year_text.setText(String.valueOf(year_x));
-        month_text.setText(String.valueOf(month_x + 1));
+        month_text.setText(String.valueOf(month_x));
         day_text.setText(String.valueOf(day_x));
+        int importance = edited_task.imp;
+        switch (importance) {
+            case 1: imp1.setChecked(true); break;
+            case 2: imp2.setChecked(true); break;
+            case 3: imp3.setChecked(true); break;
+            default: imp0.setChecked(true); break;
+        }
+        if (edited_task.req != 0) {
+            req_time_text.setText(String.valueOf(edited_task.req));
+        }
+        note_text.setText(edited_task.note);
     }
 }
+

@@ -66,7 +66,18 @@ public class MainActivity extends AppCompatActivity {
         int completedID = Integer.parseInt(taskTextView.getText().toString());
         myDb.deleteData(completedID);
         updateUI();
-        Toast.makeText(this,"Task completed",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Task completed",Toast.LENGTH_SHORT).show();
+    }
+
+    // edit a task
+    public void editTask(View view) {
+        TextView taskID = view.findViewById(R.id.textViewID);
+        int id = Integer.parseInt(taskID.getText().toString());
+        Intent intent = new Intent(this, EditTaskActivity.class);
+        Bundle b = new Bundle();
+        b.putInt("id", id);
+        intent.putExtras(b);
+        startActivity(intent);
     }
 
 }
