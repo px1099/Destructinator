@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Task Calendar</string>
+    <string name="app_name">Task List</string>
 
     // Main Activity
     <string name="event_toolbar_title">Events</string>

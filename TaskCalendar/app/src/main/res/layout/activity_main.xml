@@ -34,7 +34,6 @@
             android:layout_alignParentEnd="true"
             android:background="@color/colorPrimary"
             android:contentDescription="@string/add_event_button_description"
-            android:onClick="newEvent"
             app:srcCompat="@android:drawable/ic_menu_add" />
 
     </RelativeLayout>
