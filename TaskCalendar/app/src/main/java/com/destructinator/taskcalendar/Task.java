@@ -7,6 +7,5 @@ public class Task {
     public int month;
     public int year;
     public int imp;
-    public int req;
     public String note;
 }

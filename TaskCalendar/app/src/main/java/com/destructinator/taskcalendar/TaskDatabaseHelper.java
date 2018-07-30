@@ -26,7 +26,6 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_TASK_MONTH = "MONTH";
     private static final String KEY_TASK_YEAR = "YEAR";
     private static final String KEY_TASK_IMPORTANCE = "IMPORTANCE";
-    private static final String KEY_TASK_REQ_TIME = "REQUIRED_TIME";
     private static final String KEY_TASK_NOTE = "NOTE";
 
     public static synchronized TaskDatabaseHelper getInstance(Context context) {
@@ -54,7 +53,6 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
                     KEY_TASK_MONTH + " INTEGER," +
                     KEY_TASK_YEAR + " INTEGER," +
                     KEY_TASK_IMPORTANCE + " INTEGER," +
-                    KEY_TASK_REQ_TIME + " INTEGER," +
                     KEY_TASK_NOTE + " TEXT" +
                 ")";
 
@@ -80,7 +78,6 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_TASK_MONTH,task.month);
         values.put(KEY_TASK_YEAR,task.year);
         values.put(KEY_TASK_IMPORTANCE,task.imp);
-        values.put(KEY_TASK_REQ_TIME,task.req);
         values.put(KEY_TASK_NOTE,task.note);
         db.insert(TABLE_TASKS,null ,values);
         db.close();
@@ -94,7 +91,6 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_TASK_MONTH,task.month);
         values.put(KEY_TASK_YEAR,task.year);
         values.put(KEY_TASK_IMPORTANCE,task.imp);
-        values.put(KEY_TASK_REQ_TIME,task.req);
         values.put(KEY_TASK_NOTE,task.note);
         db.update(TABLE_TASKS,values,KEY_TASK_ID + " = ?",new String[]{String.valueOf(task.id)});
         db.close();
@@ -140,7 +136,6 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
                 current_task.month = cursor.getInt(cursor.getColumnIndex(KEY_TASK_MONTH));
                 current_task.year = cursor.getInt(cursor.getColumnIndex(KEY_TASK_YEAR));
                 current_task.imp = cursor.getInt(cursor.getColumnIndex(KEY_TASK_IMPORTANCE));
-                current_task.req = cursor.getInt(cursor.getColumnIndex(KEY_TASK_REQ_TIME));
                 current_task.note = cursor.getString(cursor.getColumnIndex(KEY_TASK_NOTE));
                 tasks.add(current_task);
             } while(cursor.moveToNext());
@@ -166,7 +161,6 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         task.month = cursor.getInt(cursor.getColumnIndex(KEY_TASK_MONTH));
         task.year = cursor.getInt(cursor.getColumnIndex(KEY_TASK_YEAR));
         task.imp = cursor.getInt(cursor.getColumnIndex(KEY_TASK_IMPORTANCE));
-        task.req = cursor.getInt(cursor.getColumnIndex(KEY_TASK_REQ_TIME));
         task.note = cursor.getString(cursor.getColumnIndex(KEY_TASK_NOTE));
         if (!cursor.isClosed())
             cursor.close();

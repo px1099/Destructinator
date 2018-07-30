@@ -21,7 +21,7 @@ public class EditTaskActivity extends AppCompatActivity {
     int year_x,month_x,day_x,task_id;
     static final int DIALOG_ID = 0;
     TextView year_text, month_text, day_text;
-    EditText task_title, req_time_text, note_text;
+    EditText task_title, note_text;
     RadioGroup importance_group;
     RadioButton imp0, imp1, imp2, imp3;
 
@@ -36,7 +36,6 @@ public class EditTaskActivity extends AppCompatActivity {
         month_text = findViewById(R.id.TextViewMonth);
         day_text = findViewById(R.id.TextViewDay);
         task_title = findViewById(R.id.TaskName);
-        req_time_text = findViewById(R.id.RequiredTime);
         note_text = findViewById(R.id.Note);
         importance_group = findViewById(R.id.ImportanceRadioGroup);
         imp0 = findViewById(R.id.ImportanceRadio0);
@@ -68,7 +67,6 @@ public class EditTaskActivity extends AppCompatActivity {
             task.month = Integer.parseInt(month_text.getText().toString());
             task.year = Integer.parseInt(year_text.getText().toString());
             task.imp = getImportance();
-            task.req = getReqtime();
             task.note = note_text.getText().toString();
             myDb.updateData(task);
             Toast.makeText(this,"Task updated",Toast.LENGTH_SHORT).show();
@@ -86,18 +84,6 @@ public class EditTaskActivity extends AppCompatActivity {
             case R.id.ImportanceRadio2:     result = 2;   break;
             case R.id.ImportanceRadio3:     result = 3;   break;
             default:                        result = 0;   break;
-        }
-        return result;
-    }
-
-    public int getReqtime() {
-        int result = 0;
-        String result_string = req_time_text.getText().toString();
-        try {
-            result = Integer.parseInt(result_string);
-        }
-        catch (NumberFormatException e) {
-            result = 0;
         }
         return result;
     }
@@ -157,9 +143,6 @@ public class EditTaskActivity extends AppCompatActivity {
             case 2: imp2.setChecked(true); break;
             case 3: imp3.setChecked(true); break;
             default: imp0.setChecked(true); break;
-        }
-        if (edited_task.req != 0) {
-            req_time_text.setText(String.valueOf(edited_task.req));
         }
         note_text.setText(edited_task.note);
     }

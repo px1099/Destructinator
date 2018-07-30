@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class NewTaskActivity extends AppCompatActivity {
     TaskDatabaseHelper myDb;
@@ -22,7 +23,7 @@ public class NewTaskActivity extends AppCompatActivity {
     int year_x,month_x,day_x;
     static final int DIALOG_ID = 0;
     TextView year_text, month_text, day_text;
-    EditText task_title, req_time_text, note_text;
+    EditText task_title, note_text;
     RadioGroup importance_group;
 
     @Override
@@ -36,7 +37,6 @@ public class NewTaskActivity extends AppCompatActivity {
         month_text = findViewById(R.id.TextViewMonth);
         day_text = findViewById(R.id.TextViewDay);
         task_title = findViewById(R.id.TaskName);
-        req_time_text = findViewById(R.id.RequiredTime);
         note_text = findViewById(R.id.Note);
         importance_group = findViewById(R.id.ImportanceRadioGroup);
         setUpCurrentDate();
@@ -57,17 +57,21 @@ public class NewTaskActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.ConfirmButton) {
-            Task new_task = new Task();
-            new_task.title = task_title.getText().toString();
-            new_task.day = Integer.parseInt(day_text.getText().toString());
-            new_task.month = Integer.parseInt(month_text.getText().toString());
-            new_task.year = Integer.parseInt(year_text.getText().toString());
-            new_task.imp = getImportance();
-            new_task.req = getReqtime();
-            new_task.note = note_text.getText().toString();
-            myDb.insertData(new_task);
-            Toast.makeText(this,"Task created",Toast.LENGTH_SHORT).show();
-            finish();
+            String testTitle = task_title.getText().toString();
+            if (Objects.equals(testTitle,null) || Objects.equals(testTitle,"")) {
+                Toast.makeText(this, "Please fill in task name", Toast.LENGTH_SHORT).show();
+            } else {
+                Task new_task = new Task();
+                new_task.title = task_title.getText().toString();
+                new_task.day = Integer.parseInt(day_text.getText().toString());
+                new_task.month = Integer.parseInt(month_text.getText().toString());
+                new_task.year = Integer.parseInt(year_text.getText().toString());
+                new_task.imp = getImportance();
+                new_task.note = note_text.getText().toString();
+                myDb.insertData(new_task);
+                Toast.makeText(this, "Task created", Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -81,18 +85,6 @@ public class NewTaskActivity extends AppCompatActivity {
             case R.id.ImportanceRadio2:     result = 2;   break;
             case R.id.ImportanceRadio3:     result = 3;   break;
             default:                        result = 0;   break;
-        }
-        return result;
-    }
-
-    public int getReqtime() {
-        int result = 0;
-        String result_string = req_time_text.getText().toString();
-        try {
-            result = Integer.parseInt(result_string);
-        }
-        catch (NumberFormatException e) {
-            result = 0;
         }
         return result;
     }
@@ -138,7 +130,7 @@ public class NewTaskActivity extends AppCompatActivity {
         month_x = cal.get(Calendar.MONTH);
         day_x = cal.get(Calendar.DAY_OF_MONTH);
         year_text.setText(String.valueOf(year_x));
-        month_text.setText(String.valueOf(month_x + 1));
+        month_text.setText(String.valueOf(month_x +1));
         day_text.setText(String.valueOf(day_x));
     }
 }

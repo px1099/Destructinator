@@ -129,25 +129,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="true" />
+            android:checked="true"
+            android:buttonTint="#0000FF" />
 
         <RadioButton
             android:id="@+id/ImportanceRadio1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:buttonTint="#00FF00" />
 
         <RadioButton
             android:id="@+id/ImportanceRadio2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:buttonTint="#FFFF00" />
 
         <RadioButton
             android:id="@+id/ImportanceRadio3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:buttonTint="#FF0000" />
     </RadioGroup>
 
     <TextView
@@ -181,49 +185,15 @@
         app:layout_constraintTop_toTopOf="@+id/ImportanceRadioGroup" />
 
     <TextView
-        android:id="@+id/TextViewTimeRequired"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/text_view_time_required"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/RequiredTime"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/RequiredTime" />
-
-    <EditText
-        android:id="@+id/RequiredTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="3"
-        android:hint="@string/hours_hint"
-        android:imeOptions="actionDone"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toStartOf="@+id/TextViewHourRequired"
-        app:layout_constraintTop_toBottomOf="@+id/ImportanceRadioGroup" />
-
-    <TextView
-        android:id="@+id/TextViewHourRequired"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="@string/hours"
-        app:layout_constraintBaseline_toBaselineOf="@+id/TextViewTimeRequired"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
         android:id="@+id/TextViewNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/text_view_note"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RequiredTime" />
+        app:layout_constraintTop_toBottomOf="@+id/ImportanceRadioGroup" />
 
     <EditText
         android:id="@+id/Note"

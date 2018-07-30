@@ -1,5 +1,6 @@
 package com.destructinator.taskcalendar;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +9,17 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     TaskDatabaseHelper myDb;     // the task list database
     ListView mTaskListView;      // the list view to display database
     TasksAdapter mAdapter;
+    int day_of_week, today_day, today_month, today_year;
+    String day_string;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myDb = TaskDatabaseHelper.getInstance(this);
         mTaskListView = findViewById(R.id.TaskList);
+        updateDay();
         updateUI();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        updateDay();
         updateUI();
     }
 
@@ -45,12 +53,46 @@ public class MainActivity extends AppCompatActivity {
     // Use this function to update task list
     private void updateUI() {
         ArrayList<Task> taskList = myDb.getAllTasks();
+        ArrayList<Task> sortedList = new ArrayList<>();
+        int numTask = taskList.size();
+        int numTaskToday = 0;
+        int numTaskOverdue = 0;
+        int i, d, m, y;
+        Task task;
+        for (i = 0; i < numTask; i++) {
+            task = taskList.get(i);
+            d = task.day;
+            m = task.month;
+            y = task.year;
+            if (compareDay(d, m, y) < 0) {
+                sortedList.add(task);
+                numTaskOverdue += 1;
+            }
+        }
+        for (i = 0; i < numTask; i++) {
+            task = taskList.get(i);
+            d = task.day;
+            m = task.month;
+            y = task.year;
+            if (compareDay(d, m, y) == 0) {
+                sortedList.add(task);
+                numTaskToday += 1;
+            }
+        }
+        for (i = 0; i < numTask; i++) {
+            task = taskList.get(i);
+            d = task.day;
+            m = task.month;
+            y = task.year;
+            if (compareDay(d, m, y) > 0)
+                sortedList.add(task);
+        }
         if (mAdapter == null) {
-            mAdapter = new TasksAdapter(this, taskList);
+            mAdapter = new TasksAdapter(this, sortedList);
             mTaskListView.setAdapter(mAdapter);
         } else {
             mAdapter.clear();
-            mAdapter.addAll(taskList);
+            mAdapter.addAll(sortedList);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -80,4 +122,28 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void updateDay() {
+        Calendar cal = Calendar.getInstance();
+        today_day = cal.get(Calendar.DAY_OF_MONTH);
+        today_month = cal.get(Calendar.MONTH)+1;
+        today_year = cal.get(Calendar.YEAR);
+        day_of_week = cal.get(Calendar.DAY_OF_WEEK);
+        String[] dates = new String[] {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        day_string = " " + dates[day_of_week-1] + ", " + today_day + "/" + today_month + "/" + today_year;
+        setTitle(day_string);
+    }
+
+    public int compareDay(int day, int month, int year) {
+        if (year > today_year)              return 1;
+        else if (year < today_year)         return -1;
+        else {
+            if (month > today_month)        return 1;
+            else if (month < today_month)   return -1;
+            else {
+                if (day > today_day)        return 1;
+                else if (day < today_day)   return -1;
+                else                        return 0;
+            }
+        }
+    }
 }

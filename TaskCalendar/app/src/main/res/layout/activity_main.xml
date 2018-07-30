@@ -69,8 +69,9 @@
         <ListView
             android:id="@+id/TaskList"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/TaskToolbar" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/TaskToolbar"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 </LinearLayout>
