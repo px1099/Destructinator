@@ -15,6 +15,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class EditTaskActivity extends AppCompatActivity {
     TaskDatabaseHelper myDb;
     ImageButton btn;
@@ -61,11 +63,13 @@ public class EditTaskActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.ConfirmButton) {
             Task task = new Task();
+            int local_d, local_m, local_y;
             task.id = task_id;
             task.title = task_title.getText().toString();
-            task.day = Integer.parseInt(day_text.getText().toString());
-            task.month = Integer.parseInt(month_text.getText().toString());
-            task.year = Integer.parseInt(year_text.getText().toString());
+            local_d = Integer.parseInt(day_text.getText().toString());
+            local_m = Integer.parseInt(month_text.getText().toString());
+            local_y = Integer.parseInt(year_text.getText().toString());
+            task.date.set(local_y,local_m-1,local_d);
             task.imp = getImportance();
             task.note = note_text.getText().toString();
             myDb.updateData(task);
@@ -131,9 +135,9 @@ public class EditTaskActivity extends AppCompatActivity {
         Task edited_task = new Task();
         edited_task = myDb.getTask(task_id);
         task_title.setText(edited_task.title);
-        year_x = edited_task.year;
-        month_x = edited_task.month;
-        day_x = edited_task.day;
+        year_x = edited_task.date.get(Calendar.YEAR);
+        month_x = edited_task.date.get(Calendar.MONTH)+1;
+        day_x = edited_task.date.get(Calendar.DAY_OF_MONTH);
         year_text.setText(String.valueOf(year_x));
         month_text.setText(String.valueOf(month_x));
         day_text.setText(String.valueOf(day_x));

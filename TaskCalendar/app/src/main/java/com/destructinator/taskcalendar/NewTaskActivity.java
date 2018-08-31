@@ -62,10 +62,13 @@ public class NewTaskActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please fill in task name", Toast.LENGTH_SHORT).show();
             } else {
                 Task new_task = new Task();
+                int local_d, local_m, local_y;
                 new_task.title = task_title.getText().toString();
-                new_task.day = Integer.parseInt(day_text.getText().toString());
-                new_task.month = Integer.parseInt(month_text.getText().toString());
-                new_task.year = Integer.parseInt(year_text.getText().toString());
+                local_d = Integer.parseInt(day_text.getText().toString());
+                local_m = Integer.parseInt(month_text.getText().toString());
+                local_y = Integer.parseInt(year_text.getText().toString());
+                new_task.date = Calendar.getInstance();
+                new_task.date.set(local_y,local_m-1,local_d);
                 new_task.imp = getImportance();
                 new_task.note = note_text.getText().toString();
                 myDb.insertData(new_task);

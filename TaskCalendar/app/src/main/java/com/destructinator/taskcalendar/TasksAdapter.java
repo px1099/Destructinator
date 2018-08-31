@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -33,14 +32,16 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         // Populate the data into the template view using the data object
         taskID.setText(String.valueOf(task.id));
         taskTitle.setText(task.title);
-        String date;
+        String date_string;
         String[] dates = new String[] {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-        Calendar cal = Calendar.getInstance();
-        cal.set(task.year,task.month-1,task.day);
-        date = dates[cal.get(Calendar.DAY_OF_WEEK)-1] + ", ";
-        date = date + String.valueOf(task.day) + "/" + String.valueOf(task.month) + "/" + String.valueOf(task.year);
+        date_string = dates[task.date.get(Calendar.DAY_OF_WEEK)-1] + ", ";
+        int local_d, local_m, local_y;
+        local_d = task.date.get(Calendar.DAY_OF_MONTH);
+        local_m = task.date.get(Calendar.MONTH) + 1;
+        local_y = task.date.get(Calendar.YEAR);
+        date_string = date_string + local_d + "/" + local_m + "/" + local_y;
         int imp = task.imp;
-        int color = 0xFF0000FF;
+        int color;
         switch (imp) {
             case 1:     color = 0xFF00FF00; break;
             case 2:     color = 0xFFFFFF00; break;
@@ -48,41 +49,53 @@ public class TasksAdapter extends ArrayAdapter<Task> {
             default:    color = 0xFF0000FF; break;
         }
         frameLayout.setBackgroundColor(color);
-        int comparedDay = compareToday(task.day,task.month,task.year);
+        int comparedDay = compareTodayAndNextWeek(task.date);
         switch (comparedDay) {
-            case -1:
-                color = 0xFFFF0000;
-                date = date + " (Overdue)";
-                break;
             case 0:
+                color = 0xFFFF0000;
+                date_string = date_string + " (Overdue)";
+                break;
+            case 1:
                 color = 0xFF0000FF;
-                date = "Today";
+                date_string = "Today";
+                break;
+            case 2:
+                color = 0xFF00B050;
+                date_string = "Next " + date_string;
                 break;
             default:
                 color = 0xFF000000;
                 break;
         }
         taskTitle.setTextColor(color);
-        taskDate.setText(date);
+        taskDate.setText(date_string);
         // Return the completed view to render on screen
         return convertView;
     }
 
-    public int compareToday(int day, int month, int year) {
-        Calendar today_cal = Calendar.getInstance();
-        int today_day = today_cal.get(Calendar.DAY_OF_MONTH);
-        int today_month = today_cal.get(Calendar.MONTH)+1;
-        int today_year = today_cal.get(Calendar.YEAR);
-        if (year > today_year)              return 1;
-        else if (year < today_year)         return -1;
-        else {
-            if (month > today_month)        return 1;
-            else if (month < today_month)   return -1;
-            else {
-                if (day > today_day)        return 1;
-                else if (day < today_day)   return -1;
-                else                        return 0;
-            }
+    public int compareTodayAndNextWeek(Calendar date) {
+        Calendar today_date = Calendar.getInstance();
+        Calendar next_week_date = Calendar.getInstance();
+        next_week_date.add(Calendar.DATE, 7);
+        if (compareDate(date, today_date) < 0) {
+            return 0;
         }
+        else if (compareDate(date, today_date) == 0) {
+            return 1;
+        }
+        else if ((compareDate(date, today_date) > 0) && (compareDate(date, next_week_date) <= 0)) {
+            return 2;
+        }
+        else {
+            return 3;
+        }
+    }
+
+    public int compareDate(Calendar c1, Calendar c2) {
+        if (c1.get(Calendar.YEAR) != c2.get(Calendar.YEAR))
+            return c1.get(Calendar.YEAR) - c2.get(Calendar.YEAR);
+        if (c1.get(Calendar.MONTH) != c2.get(Calendar.MONTH))
+            return c1.get(Calendar.MONTH) - c2.get(Calendar.MONTH);
+        return c1.get(Calendar.DAY_OF_MONTH) - c2.get(Calendar.DAY_OF_MONTH);
     }
 }

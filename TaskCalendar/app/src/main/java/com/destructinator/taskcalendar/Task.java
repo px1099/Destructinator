@@ -1,11 +1,11 @@
 package com.destructinator.taskcalendar;
 
+import java.util.Calendar;
+
 public class Task {
     public int id;
     public String title;
-    public int day;
-    public int month;
-    public int year;
+    public Calendar date;
     public int imp;
     public String note;
 }

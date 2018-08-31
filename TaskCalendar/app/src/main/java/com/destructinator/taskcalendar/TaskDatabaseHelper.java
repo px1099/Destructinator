@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
 public class TaskDatabaseHelper extends SQLiteOpenHelper {
     private static TaskDatabaseHelper sInstance;
@@ -74,9 +74,9 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_TASK_TITLE,task.title);
-        values.put(KEY_TASK_DAY,task.day);
-        values.put(KEY_TASK_MONTH,task.month);
-        values.put(KEY_TASK_YEAR,task.year);
+        values.put(KEY_TASK_DAY,(task.date).get(Calendar.DAY_OF_MONTH));
+        values.put(KEY_TASK_MONTH,(task.date).get(Calendar.MONTH)+1);
+        values.put(KEY_TASK_YEAR,(task.date).get(Calendar.YEAR));
         values.put(KEY_TASK_IMPORTANCE,task.imp);
         values.put(KEY_TASK_NOTE,task.note);
         db.insert(TABLE_TASKS,null ,values);
@@ -87,9 +87,9 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_TASK_TITLE,task.title);
-        values.put(KEY_TASK_DAY,task.day);
-        values.put(KEY_TASK_MONTH,task.month);
-        values.put(KEY_TASK_YEAR,task.year);
+        values.put(KEY_TASK_DAY,(task.date).get(Calendar.DAY_OF_MONTH));
+        values.put(KEY_TASK_MONTH,(task.date).get(Calendar.MONTH)+1);
+        values.put(KEY_TASK_YEAR,(task.date).get(Calendar.YEAR));
         values.put(KEY_TASK_IMPORTANCE,task.imp);
         values.put(KEY_TASK_NOTE,task.note);
         db.update(TABLE_TASKS,values,KEY_TASK_ID + " = ?",new String[]{String.valueOf(task.id)});
@@ -130,11 +130,14 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Task current_task = new Task();
+                int local_d,local_m,local_y;
                 current_task.id = cursor.getInt(cursor.getColumnIndex(KEY_TASK_ID));
                 current_task.title = cursor.getString(cursor.getColumnIndex(KEY_TASK_TITLE));
-                current_task.day = cursor.getInt(cursor.getColumnIndex(KEY_TASK_DAY));
-                current_task.month = cursor.getInt(cursor.getColumnIndex(KEY_TASK_MONTH));
-                current_task.year = cursor.getInt(cursor.getColumnIndex(KEY_TASK_YEAR));
+                local_d = cursor.getInt(cursor.getColumnIndex(KEY_TASK_DAY));
+                local_m = cursor.getInt(cursor.getColumnIndex(KEY_TASK_MONTH));
+                local_y = cursor.getInt(cursor.getColumnIndex(KEY_TASK_YEAR));
+                current_task.date = Calendar.getInstance();
+                current_task.date.set(local_y,local_m-1,local_d);
                 current_task.imp = cursor.getInt(cursor.getColumnIndex(KEY_TASK_IMPORTANCE));
                 current_task.note = cursor.getString(cursor.getColumnIndex(KEY_TASK_NOTE));
                 tasks.add(current_task);
@@ -155,11 +158,14 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         if (cursor != null) {
             cursor.moveToFirst();
         }
+        int local_d,local_m,local_y;
         task.id = cursor.getInt(cursor.getColumnIndex(KEY_TASK_ID));
         task.title = cursor.getString(cursor.getColumnIndex(KEY_TASK_TITLE));
-        task.day = cursor.getInt(cursor.getColumnIndex(KEY_TASK_DAY));
-        task.month = cursor.getInt(cursor.getColumnIndex(KEY_TASK_MONTH));
-        task.year = cursor.getInt(cursor.getColumnIndex(KEY_TASK_YEAR));
+        local_d = cursor.getInt(cursor.getColumnIndex(KEY_TASK_DAY));
+        local_m = cursor.getInt(cursor.getColumnIndex(KEY_TASK_MONTH));
+        local_y = cursor.getInt(cursor.getColumnIndex(KEY_TASK_YEAR));
+        task.date = Calendar.getInstance();
+        task.date.set(local_y,local_m-1,local_d);
         task.imp = cursor.getInt(cursor.getColumnIndex(KEY_TASK_IMPORTANCE));
         task.note = cursor.getString(cursor.getColumnIndex(KEY_TASK_NOTE));
         if (!cursor.isClosed())
