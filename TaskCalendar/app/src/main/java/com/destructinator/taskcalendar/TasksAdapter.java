@@ -16,6 +16,13 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         super(context,0,tasks);
     }
 
+    private static final int RED = 0xFFFF0000;
+    private static final int YELLOW = 0xFFFFFF00;
+    private static final int GREEN = 0xFF00FF00;
+    private static final int BLUE = 0xFF0000FF;
+    private static final int DARK_GREEN = 0xFF00B050;
+    private static final int BLACK = 0xFF000000;
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
@@ -43,28 +50,28 @@ public class TasksAdapter extends ArrayAdapter<Task> {
         int imp = task.imp;
         int color;
         switch (imp) {
-            case 1:     color = 0xFF00FF00; break;
-            case 2:     color = 0xFFFFFF00; break;
-            case 3:     color = 0xFFFF0000; break;
-            default:    color = 0xFF0000FF; break;
+            case 1:     color = GREEN; break;
+            case 2:     color = YELLOW; break;
+            case 3:     color = RED; break;
+            default:    color = BLUE; break;
         }
         frameLayout.setBackgroundColor(color);
         int comparedDay = compareTodayAndNextWeek(task.date);
         switch (comparedDay) {
             case 0:
-                color = 0xFFFF0000;
+                color = RED;
                 date_string = date_string + " (Overdue)";
                 break;
             case 1:
-                color = 0xFF0000FF;
+                color = BLUE;
                 date_string = "Today";
                 break;
             case 2:
-                color = 0xFF00B050;
+                color = DARK_GREEN;
                 date_string = "Next " + date_string;
                 break;
             default:
-                color = 0xFF000000;
+                color = BLACK;
                 break;
         }
         taskTitle.setTextColor(color);

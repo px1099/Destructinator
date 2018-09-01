@@ -28,6 +28,10 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_TASK_IMPORTANCE = "IMPORTANCE";
     private static final String KEY_TASK_NOTE = "NOTE";
 
+    // Sort option
+    private static final int SORT_BY_DATE = 0;
+    private static final int SORT_BY_IMP = 1;
+
     public static synchronized TaskDatabaseHelper getInstance(Context context) {
         // Use the application context, which will ensure that you
         // don't accidentally leak an Activity's context.
@@ -116,16 +120,28 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
     }
     */
 
-    public ArrayList<Task> getAllTasks() {
+    public ArrayList<Task> getAllTasks(int sort_option) {
         ArrayList<Task> tasks = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_TASKS,null,null,null,null,null,
-                KEY_TASK_IMPORTANCE + " DESC, " +
-                        KEY_TASK_YEAR + " ASC, " +
-                        KEY_TASK_MONTH + " ASC, " +
-                        KEY_TASK_DAY + " ASC, " +
-                        KEY_TASK_ID + " ASC"
-        );
+        String queryOrder;
+
+        if (sort_option == SORT_BY_IMP) {
+            queryOrder =    KEY_TASK_IMPORTANCE + " DESC, " +
+                            KEY_TASK_YEAR + " ASC, " +
+                            KEY_TASK_MONTH + " ASC, " +
+                            KEY_TASK_DAY + " ASC, " +
+                            KEY_TASK_ID + " ASC";
+        } else if (sort_option == SORT_BY_DATE) {
+            queryOrder =    KEY_TASK_YEAR + " ASC, " +
+                            KEY_TASK_MONTH + " ASC, " +
+                            KEY_TASK_DAY + " ASC, " +
+                            KEY_TASK_IMPORTANCE + " DESC, " +
+                            KEY_TASK_ID + " ASC";
+        } else {
+            return tasks;
+        }
+
+        Cursor cursor = db.query(TABLE_TASKS,null,null,null,null,null,queryOrder);
 
         if (cursor.moveToFirst()) {
             do {

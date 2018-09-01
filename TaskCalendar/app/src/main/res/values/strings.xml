@@ -3,12 +3,14 @@
 
     // Main Activity
     <string name="event_toolbar_title">Events</string>
-    <string name="task_toolbar_title">Tasks</string>
+    <string name="task_toolbar_title">Sorted by:</string>
     <string name="add_event_button_description">Add Event</string>
     <string name="add_task_button_description">Add Task</string>
     <string name="complete_button">Done</string>
+    <string name="switch_text_1">Date</string>
+    <string name="switch_text_2">Importance</string>
 
-    // Add Event Activity
+    // Add Task Activity
     <string name="text_view_task_name">Task Name</string>
     <string name="plain_text_task_name_hint">Enter Task Here</string>
     <string name="text_view_due_date">Due Date</string>
