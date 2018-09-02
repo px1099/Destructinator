@@ -100,25 +100,25 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /*
     public void deleteData(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TASKS,KEY_TASK_ID + " = ?",new String[]{String.valueOf(id)});
         db.close();
     }
 
-    /*
     public void deleteData(String task_name) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TASKS,KEY_TASK_TITLE + " = ?",new String[]{task_name});
         db.close();
     }
+    */
 
     public void deleteData(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TASKS,KEY_TASK_ID + " = ?",new String[]{String.valueOf(task.id)});
         db.close();
     }
-    */
 
     public ArrayList<Task> getAllTasks(int sort_option) {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -130,13 +130,13 @@ public class TaskDatabaseHelper extends SQLiteOpenHelper {
                             KEY_TASK_YEAR + " ASC, " +
                             KEY_TASK_MONTH + " ASC, " +
                             KEY_TASK_DAY + " ASC, " +
-                            KEY_TASK_ID + " ASC";
+                            KEY_TASK_TITLE + " ASC";
         } else if (sort_option == SORT_BY_DATE) {
             queryOrder =    KEY_TASK_YEAR + " ASC, " +
                             KEY_TASK_MONTH + " ASC, " +
                             KEY_TASK_DAY + " ASC, " +
                             KEY_TASK_IMPORTANCE + " DESC, " +
-                            KEY_TASK_ID + " ASC";
+                            KEY_TASK_TITLE + " ASC";
         } else {
             return tasks;
         }

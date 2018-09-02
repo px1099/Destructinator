@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/AddTaskLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NewTaskActivity">
@@ -27,8 +27,8 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="@string/plain_text_task_name_hint"
-        android:inputType="text"
         android:imeOptions="actionDone"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TextViewTaskName" />
@@ -129,8 +129,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="true"
-            android:buttonTint="#0000FF" />
+            android:buttonTint="#0000FF"
+            android:checked="true" />
 
         <RadioButton
             android:id="@+id/ImportanceRadio1"
@@ -206,12 +206,12 @@
         android:background="#d8faff"
         android:gravity="top|start"
         android:hint="@string/note_hint"
+        android:imeOptions="actionDone"
         android:inputType="textMultiLine"
         android:lines="8"
         android:maxLines="10"
         android:minLines="6"
         android:scrollbars="vertical"
-        android:imeOptions="actionDone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

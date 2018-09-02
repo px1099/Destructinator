@@ -1,79 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:baselineAligned="false">
+    tools:context=".MainActivity">
 
-    <RelativeLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/TaskToolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/NewTaskButton"
+        android:background="@color/colorPrimary"
+        android:minHeight="?android:attr/actionBarSize"
+        app:title="@string/task_toolbar_title"
+        app:titleTextColor="@android:color/white" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/TaskToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_toStartOf="@id/NewTaskButton"
-            android:background="@color/colorPrimary"
-            android:minHeight="?android:attr/actionBarSize"
-            app:title="@string/task_toolbar_title"
-            app:titleTextColor="@android:color/white" />
+    <TextView
+        android:id="@+id/SortDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@id/SortSwitch"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="@string/switch_text_1"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/SortDateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="?android:attr/actionBarSize"
-            android:layout_marginEnd="8dp"
-            android:layout_toStartOf="@id/SortSwitch"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:text="@string/switch_text_1"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/SortSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@id/SortImpTextView"
+        android:background="@color/colorPrimary"
+        android:checked="false"
+        android:theme="@style/SCBSwitch" />
 
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/SortSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="?android:attr/actionBarSize"
-            android:layout_toStartOf="@id/SortImpTextView"
-            android:layout_marginEnd="8dp"
-            android:background="@color/colorPrimary"
-            android:checked="false"
-            android:theme="@style/SCBSwitch" />
+    <TextView
+        android:id="@+id/SortImpTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginEnd="16dp"
+        android:layout_toStartOf="@id/NewTaskButton"
+        android:gravity="center"
+        android:text="@string/switch_text_2"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/SortImpTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="?android:attr/actionBarSize"
-            android:layout_marginEnd="16dp"
-            android:layout_toStartOf="@id/NewTaskButton"
-            android:gravity="center"
-            android:text="@string/switch_text_2"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+    <ImageButton
+        android:id="@+id/NewTaskButton"
+        android:layout_width="?android:attr/actionBarSize"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/add_task_button_description"
+        android:onClick="newTask"
+        android:tint="@android:color/white"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
-        <ImageButton
-            android:id="@+id/NewTaskButton"
-            android:layout_width="?android:attr/actionBarSize"
-            android:layout_height="?android:attr/actionBarSize"
-            android:layout_alignParentEnd="true"
-            android:background="@color/colorPrimary"
-            android:contentDescription="@string/add_task_button_description"
-            android:onClick="newTask"
-            android:tint="@android:color/white"
-            app:srcCompat="@android:drawable/ic_menu_add" />
+    <ListView
+        android:id="@+id/TaskList"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/TaskToolbar" />
 
-        <ListView
-            android:id="@+id/TaskList"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/TaskToolbar"
-            android:layout_alignParentBottom="true"/>
-
-    </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

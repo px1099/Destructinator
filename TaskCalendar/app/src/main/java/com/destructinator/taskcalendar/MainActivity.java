@@ -1,6 +1,7 @@
 package com.destructinator.taskcalendar;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     TasksAdapter mAdapter;
     SwitchCompat mSwitch;
     Calendar today_date, next_week_date;
+    Task recentCompletedTask;
     String day_string;
     int sort_option;
 
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     static boolean isTouched = false;
     private static final int SORT_BY_DATE = 0;
     private static final int SORT_BY_IMP = 1;
+
+    // Undo button color
+    private static final int LIGHT_BLUE = 0xFF00FFFF;
 
     // set up switch
     private View.OnTouchListener mSwitchTouchListener = new View.OnTouchListener() {
@@ -37,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+
+    // set up snackbar undo class
+    public class MyUndoListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+            // Code to undo the user's last action
+            myDb.insertData(recentCompletedTask);
+            updateUI();
+        }
+    }
 
     CompoundButton.OnCheckedChangeListener mSwitchChangeListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
@@ -135,9 +151,15 @@ public class MainActivity extends AppCompatActivity {
             box.toggle();
         }
         int completedID = Integer.parseInt(taskTextView.getText().toString());
-        myDb.deleteData(completedID);
+        recentCompletedTask = myDb.getTask(completedID);
+        String task_complete_message = "Task completed: " + recentCompletedTask.title;
+        myDb.deleteData(recentCompletedTask);
         updateUI();
-        Toast.makeText(this,"Task completed",Toast.LENGTH_SHORT).show();
+        Snackbar mySnackBar = Snackbar.make(findViewById(R.id.MainLayout),
+                task_complete_message, Snackbar.LENGTH_LONG);
+        mySnackBar.setActionTextColor(LIGHT_BLUE);
+        mySnackBar.setAction(R.string.undo_button_string, new MyUndoListener());
+        mySnackBar.show();
     }
 
     // edit a task

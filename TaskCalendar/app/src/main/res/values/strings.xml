@@ -9,6 +9,7 @@
     <string name="complete_button">Done</string>
     <string name="switch_text_1">Date</string>
     <string name="switch_text_2">Importance</string>
+    <string name="undo_button_string">Undo</string>
 
     // Add Task Activity
     <string name="text_view_task_name">Task Name</string>
