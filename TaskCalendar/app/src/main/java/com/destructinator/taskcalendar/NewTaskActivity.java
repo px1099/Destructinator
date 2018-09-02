@@ -73,7 +73,8 @@ public class NewTaskActivity extends AppCompatActivity {
                 new_task.imp = getImportance();
                 new_task.note = note_text.getText().toString();
                 myDb.insertData(new_task);
-                Toast.makeText(this, "Task created", Toast.LENGTH_SHORT).show();
+                String added_toast_string = "Task created:  " + new_task.title;
+                Toast.makeText(this, added_toast_string, Toast.LENGTH_SHORT).show();
                 finish();
             }
         }

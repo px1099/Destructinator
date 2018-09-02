@@ -69,11 +69,13 @@ public class EditTaskActivity extends AppCompatActivity {
             local_d = Integer.parseInt(day_text.getText().toString());
             local_m = Integer.parseInt(month_text.getText().toString());
             local_y = Integer.parseInt(year_text.getText().toString());
+            task.date = Calendar.getInstance();
             task.date.set(local_y,local_m-1,local_d);
             task.imp = getImportance();
             task.note = note_text.getText().toString();
             myDb.updateData(task);
-            Toast.makeText(this,"Task updated",Toast.LENGTH_SHORT).show();
+            String edited_toast_string = "Task updated:  " + task.title;
+            Toast.makeText(this,edited_toast_string,Toast.LENGTH_SHORT).show();
             finish();
         }
         return super.onOptionsItemSelected(item);

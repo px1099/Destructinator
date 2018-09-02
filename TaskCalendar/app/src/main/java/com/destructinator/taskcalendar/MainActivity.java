@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         }
         int completedID = Integer.parseInt(taskTextView.getText().toString());
         recentCompletedTask = myDb.getTask(completedID);
-        String task_complete_message = "Task completed: " + recentCompletedTask.title;
+        String task_complete_message = "Task completed:  " + recentCompletedTask.title;
         myDb.deleteData(recentCompletedTask);
         updateUI();
         Snackbar mySnackBar = Snackbar.make(findViewById(R.id.MainLayout),
