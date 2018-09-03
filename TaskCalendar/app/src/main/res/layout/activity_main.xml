@@ -35,12 +35,13 @@
 
     <TextView
         android:id="@+id/SortDateTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="44dp"
         android:layout_height="?android:attr/actionBarSize"
         android:layout_marginStart="16dp"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="@string/switch_text_1"
+        android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/SortSwitch"
@@ -62,11 +63,12 @@
 
     <TextView
         android:id="@+id/SortImpTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="?android:attr/actionBarSize"
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:text="@string/switch_text_2"
+        android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/NewTaskButton"

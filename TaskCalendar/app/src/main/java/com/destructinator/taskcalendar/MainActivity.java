@@ -1,10 +1,12 @@
 package com.destructinator.taskcalendar;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SwitchCompat;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
@@ -17,10 +19,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    TaskDatabaseHelper myDb;     // the task list database
-    ListView mTaskListView;      // the list view to display database
-    TasksAdapter mAdapter;
-    SwitchCompat mSwitch;
+    TaskDatabaseHelper myDb;    // the task list database
+    ListView mTaskListView;     // the list view to display database
+    TasksAdapter mAdapter;      // the adapter to populate ListView
+    SwitchCompat mSwitch;       // the switch to pick sort mode
+    TextView dateText, impText; // the two TextView next to the switch
     Calendar today_date, next_week_date;
     Task recentCompletedTask;
     String day_string;
@@ -31,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int SORT_BY_DATE = 0;
     private static final int SORT_BY_IMP = 1;
 
-    // Undo button color
+    // Colors
     private static final int LIGHT_BLUE = 0xFF00FFFF;
+    private static final int WHITE = 0xFFFFFFFF;
+    private static final int GRAY = 0xFFD3D3D3;
 
     // set up switch
     private View.OnTouchListener mSwitchTouchListener = new View.OnTouchListener() {
@@ -43,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    // set up snackbar undo class
+    // set up SnackBar undo listener class
     public class MyUndoListener implements View.OnClickListener{
 
         @Override
@@ -61,10 +66,22 @@ public class MainActivity extends AppCompatActivity {
                 isTouched = false;
                 if (isChecked) {
                     sort_option = SORT_BY_IMP;
+                    impText.setTypeface(null, Typeface.BOLD);
+                    impText.setTextColor(WHITE);
+                    impText.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+                    dateText.setTypeface(null, Typeface.NORMAL);
+                    dateText.setTextColor(GRAY);
+                    dateText.setTextSize(TypedValue.COMPLEX_UNIT_SP,14);
                     updateUI();
                 }
                 else {
                     sort_option = SORT_BY_DATE;
+                    dateText.setTypeface(null, Typeface.BOLD);
+                    dateText.setTextColor(WHITE);
+                    dateText.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+                    impText.setTypeface(null, Typeface.NORMAL);
+                    impText.setTextColor(GRAY);
+                    impText.setTextSize(TypedValue.COMPLEX_UNIT_SP,14);
                     updateUI();
                 }
             }
@@ -81,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
         mSwitch.setOnTouchListener(mSwitchTouchListener);
         mSwitch.setOnCheckedChangeListener(mSwitchChangeListener);
         sort_option = SORT_BY_DATE;
+        dateText = findViewById(R.id.SortDateTextView);
+        impText = findViewById(R.id.SortImpTextView);
+        dateText.setTypeface(null, Typeface.BOLD);
+        dateText.setTextColor(WHITE);
+        dateText.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
+        impText.setTypeface(null, Typeface.NORMAL);
+        impText.setTextColor(GRAY);
+        impText.setTextSize(TypedValue.COMPLEX_UNIT_SP,14);
         updateDay();
         updateUI();
     }
